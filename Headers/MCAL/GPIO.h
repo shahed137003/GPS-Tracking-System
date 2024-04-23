@@ -2,7 +2,7 @@
 #define GPIO_H
 
 #include <stdio.h>
-#include "tm4c123gh6pm.h"
+#include "../Services/TM4C123.h"
 #include "../Services/types.h"
 #include "../Services/bit_utilities.h"
 
