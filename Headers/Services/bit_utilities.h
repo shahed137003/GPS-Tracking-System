@@ -3,7 +3,7 @@
 
 #define READ_REG(reg)        (reg&0xff)
 
-#define SET(reg,val)        reg |= val
+#define SET(reg,val)          reg |= val
 
 #define CLEAR(reg,val)        reg &=~val
 
