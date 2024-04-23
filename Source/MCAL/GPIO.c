@@ -1,4 +1,4 @@
-#include "GPIO.h"
+#include "../../Headers/MCAL/GPIO.h"
 
 void gpio_digital_port_init(port_index_t port, pin_index_t pin, direction_t direction){
 	switch(port){
