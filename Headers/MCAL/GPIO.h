@@ -3,12 +3,8 @@
 
 #include <stdio.h>
 #include "tm4c123gh6pm.h"
-#include "types.h"
-
-#define SET_BIT(REG,BIT_POSN)       (REG |= (1 << BIT_POSN))
-#define CLEAR_BIT(REG,BIT_POSN)     (REG &= ~(1 << BIT_POSN))
-#define TOGGLE_BIT(REG,BIT_POSN)    (REG ^= (1 << BIT_POSN))
-#define READ_BIT(REG,BIT_POSN)      ( (REG>>BIT_POSN) & (uint8_t)1 )
+#include "../Services/types.h"
+#include "../Services/bit_utilities.h"
 
 
 typedef enum{
