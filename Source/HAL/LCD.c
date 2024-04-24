@@ -74,9 +74,9 @@ Std_ReturnType lcd_4bit_send_char_data(const chr_lcd_4bit_t *lcd, uint8_t data){
     }
     else{
 			  /**< Set RS pin to high for data --> RS = 1 */
-			 gpio_digital_port_write(lcd->lcd_rs.port , lcd->lcd_rs.pin , HIGH);
-			/** Set RW pin to low for write  --> RW = 0 *//////
-			/* Send the data through the 4-Pins" Data lines */
+			  gpio_digital_port_write(lcd->lcd_rs.port , lcd->lcd_rs.pin , HIGH);
+		  	/** Set RW pin to low for write  --> RW = 0 *//////
+			  /* Send the data through the 4-Pins" Data lines */
         ret = lcd_send_4bits(lcd, data >> 4);
         /* Send the Enable Signal  */
         ret = lcd_4bit_send_enable_signal(lcd);
@@ -163,7 +163,7 @@ Std_ReturnType lcd_8bit_send_command(const chr_lcd_8bit_t *lcd, uint8_t command)
         ret = E_NOT_OK;
     }
     else{
-			 /* Write Logic (0) to the "Register Select" Pin to select the "Instruction Register"  */
+			  /* Write Logic (0) to the "Register Select" Pin to select the "Instruction Register"  */
 			  /* Set RS pin to low for command --> RS = 0 */
         gpio_digital_port_write(lcd->lcd_rs.port , lcd->lcd_rs.pin , LOW);
         /* Send the Command through the "8-Pins" Data lines */
