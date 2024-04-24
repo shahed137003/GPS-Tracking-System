@@ -14,8 +14,8 @@ typedef enum{
 }logic_t;
 
 typedef enum{
-    OUTPUT=0,
-    INPUT
+    INPUT=0,
+    OUTPUT
 }direction_t;
 
 typedef enum{
