@@ -34,24 +34,44 @@
 
 /* ----------------- Data Type Declarations -----------------*/
 
-typedef struct{
-    uint8_t port   		: 3;
-    uint8_t pin    		: 3;
-    uint8_t direction   : 1;
-    uint8_t logic 		: 1;
-}pin_config_t;
+//typedef struct{
+//    uint8_t port   		: 3;
+//    uint8_t pin    		: 3;
+//    uint8_t direction   : 1;
+//    uint8_t logic 		: 1;
+//}pin_config_t;
 
-typedef struct{
-    pin_config_t lcd_rs;
-    pin_config_t lcd_en;
-    pin_config_t lcd_data[4];
-}chr_lcd_4bit_t;
+//typedef struct{
+//    pin_config_t lcd_rs;
+//    pin_config_t lcd_en;
+//    pin_config_t lcd_data[4];
+//}chr_lcd_4bit_t;
 
-typedef struct{
-    pin_config_t lcd_rs;
-    pin_config_t lcd_en;
-    pin_config_t lcd_data[8];
-}chr_lcd_8bit_t;
+//typedef struct{
+//    pin_config_t lcd_rs;
+//    pin_config_t lcd_en;
+//    pin_config_t lcd_data[8];
+//}chr_lcd_8bit_t;
+
+
+#define LCD_8_BIT_MODE             8
+#define LCD_4_BIT_MODE             4
+#define LCD_MODE               LCD_4_BIT_MODE
+//*************************CONTROL PORT*************************
+#define LCD_CONTROL_PORT                 PORTA_INDEX
+#define LCD_RS_PIN                       DIO_u8_PIN6
+#define LCD_RW_PIN                       DIO_u8_PIN0
+#define LCD_EN_PIN                       DIO_u8_PIN7
+//*************************DATA PORT****************************
+#define LCD_DATA_PORT                    PORTA_INDEX
+#define LCD_D0_PIN                       PIN0
+#define LCD_D1_PIN                       PIN1
+#define LCD_D2_PIN                       PIN2
+#define LCD_D3_PIN                       PIN3
+#define LCD_D4_PIN                       PIN4
+#define LCD_D5_PIN                       PIN5
+#define LCD_D6_PIN                       PIN6
+#define LCD_D7_PIN                       PIN7
 
 /* ----------------- Software Interfaces Declarations -----------------*/
 
