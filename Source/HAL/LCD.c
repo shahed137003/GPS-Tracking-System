@@ -1,5 +1,6 @@
 #include "../../Headers/HAL/LCD.h"
 
+
 /*---------------------------Static Helper Functions----------------------------*/
 static Std_ReturnType lcd_send_4bits(const chr_lcd_4bit_t *lcd, uint8_t _data_command);
 
