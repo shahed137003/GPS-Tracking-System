@@ -1,9 +1,9 @@
-# include "../../Headers/HAL/GPS.h"
-# include "../../Headers/MCAL/UART.h"
-# include <string.h>
-# include <stdlib.h>
+#include "../../Headers/HAL/GPS_module.h"
+#include "../../Headers/MCAL/UART.h"
+#include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
-# include <math.h>
+#include <math.h>
 
 char message[]="$GPRMC, 203522.00, A, 5109.0262308, S, 11401.8407342, E, 0.004, 133. 4, 130522, 0.0, E, D*2B";
  char logElements[12][20];
