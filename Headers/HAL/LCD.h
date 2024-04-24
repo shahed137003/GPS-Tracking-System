@@ -59,9 +59,9 @@
 #define LCD_MODE               LCD_4_BIT_MODE
 //*************************CONTROL PORT*************************
 #define LCD_CONTROL_PORT                 PORTA_INDEX
-#define LCD_RS_PIN                       DIO_u8_PIN6
-#define LCD_RW_PIN                       DIO_u8_PIN0
-#define LCD_EN_PIN                       DIO_u8_PIN7
+#define LCD_RS_PIN                       PIN0
+#define LCD_RW_PIN                       PIN1
+#define LCD_EN_PIN                       PIN2
 //*************************DATA PORT****************************
 #define LCD_DATA_PORT                    PORTA_INDEX
 #define LCD_D0_PIN                       PIN0
