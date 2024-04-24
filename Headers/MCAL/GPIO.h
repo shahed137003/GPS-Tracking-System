@@ -5,6 +5,7 @@
 #include "../Services/TM4C123.h"
 #include "../Services/types.h"
 #include "../Services/bit_utilities.h"
+#include "SysTick.h"
 
 
 typedef enum{
@@ -44,8 +45,4 @@ uint8_t gpio_digital_read(port_index_t port, pin_index_t pin);
 void gpio_digital_toggle(port_index_t port, pin_index_t pin);
 
 
-
-
-
-
-#endif 
+#endif
