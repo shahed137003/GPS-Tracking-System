@@ -2,6 +2,7 @@
 #define LCD_H
 #include "../MCAL/GPIO.h"
 
+
 /* ----------------- Macro Declarations -----------------*/
 #define _LCD_CLEAR                      		 0X01
 #define _LCD_RETURN_HOME               			 0x02

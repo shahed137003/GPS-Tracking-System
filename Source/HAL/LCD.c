@@ -1,6 +1,5 @@
 #include "../../Headers/HAL/LCD.h"
 
-
 /*---------------------------Static Helper Functions----------------------------*/
 static Std_ReturnType lcd_send_4bits(const chr_lcd_4bit_t *lcd, uint8_t _data_command);
 
@@ -267,7 +266,6 @@ static Std_ReturnType lcd_8bit_set_cursor(const chr_lcd_8bit_t *lcd, uint8_t row
     }
     return ret;
 }
-
 
 static Std_ReturnType lcd_4bit_set_cursor(const chr_lcd_4bit_t *lcd, uint8_t row, uint8_t coulmn){
     Std_ReturnType ret = E_OK;
