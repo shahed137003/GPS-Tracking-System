@@ -7,10 +7,11 @@
 #include <stdlib.h>
 
 
-
 void GPS_read(void);
-
-
+float toDegree(float angle);
 void GPS_output_format();
+float harversine(float LongAinRad, float LatAinRad, float LongBinRad, float LatBinRad);
+float obtainDistance(float LongA, float LatA, float LongB, float LatB);
+
 
 #endif
