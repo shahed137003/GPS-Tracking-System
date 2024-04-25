@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 
-char message[]="$GPRMC, 203522.00, A, 5109.0262308, S, 11401.8407342, E, 0.004, 133. 4, 130522, 0.0, E, D*2B";
+//char message[]="$GPRMC, 203522.00, A, 5109.0262308, S, 11401.8407342, E, 0.004, 133. 4, 130522, 0.0, E, D*2B";          //  Was used for testing  before connecting the GPS to Tiva 
  char logElements[12][20];
 float currLong;
 float currLatit;
@@ -16,11 +16,12 @@ char recievedChar[100];
 
 
 	void GPS_read(){                                 //this function will only work when Uart reads data
-int flag=1;
+int flag=1;                                              // the flag will be always 1 in case all chars are matched 
 	int i;
 	  for( i=0;i<100;i++){  
-	 GPS_module[i]=message[i];    			// the flag will be always 1 in case all chars are matched 
-			  }
+	// GPS_module[i]=message[i];    			//used for testing
+	   GPS_module[i]=UART_READ(); 	                        //will read DATA from UART
+	       }
     for(i=0;i<7;i++)		
 	   if(log_name[i]!= GPS_module[i])
 	     {
@@ -33,9 +34,12 @@ int flag=1;
 
 // for formating the gps module output:
 		
+		
 void GPS_output_format(){
+  int  flag =1;
 	char numOfGPSElements=0;
-	pointer=strtok( message,", ");
+//	pointer=strtok( message,", ");                            
+	pointer =strtok(GPS_module,", ");
 do{
 strcpy(logElements[numOfGPSElements], pointer);
 	pointer=strtok(NULL,", ");
@@ -48,30 +52,35 @@ strcpy(logElements[numOfGPSElements], pointer);
 ////then we will get the current long and lat :)
 
 // //here we check the validity of the string formated gps_module
+	
 if(strcmp(logElements[2],"A")==0)
 {
-
+flag=1;
 //// to get the current long:)
-if(strcmp(logElements[4],"N")==0){
+if(flag==1 && strcmp(logElements[4],"N")==0){
 	currLatit=atof(logElements[3]);
 printf("currLatit: %f \n",currLatit);	
 }
-else if(strcmp(logElements[4],"S")==0){
+else if(flag==1 && strcmp(logElements[4],"S")==0){
  currLatit=-atof(logElements[3]);
 printf("currLatit: %f \n",currLatit);	
     
 }
 
 // //to get the current latitude:)
-if(strcmp(logElements[6],"E")==0){
+if(flag==1 && strcmp(logElements[6],"E")==0){
 	currLong=atof(logElements[5]);
 	printf("currLong: %f",currLong);	
 }
-else if(strcmp(logElements[6],"W")==0){
+else if(flag==1 && strcmp(logElements[6],"W")==0){
  currLong=-atof(logElements[5]);
 printf("currLong: %f",currLong);	
 }
 
+}
+else if(strcmp(logElements[2],"V")==0)
+{ printf ("INVALID DATA");
+flag =0;
 }
 }
 
