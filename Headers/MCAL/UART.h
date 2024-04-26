@@ -23,7 +23,7 @@ void CharOut0(char data); //to transmit the data
 /******** UART1 **********/
 void UART1_Ini(void);  //initialization for UART1
 
-unsigned char CharIn1(void); //to Receive the data
+char CharIn1(void); //to Receive the data
 
 void CharOut1(char data); //to transmit the data
 
