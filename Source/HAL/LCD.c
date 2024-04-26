@@ -356,7 +356,8 @@ static Std_ReturnType lcd_4bit_set_cursor(const chr_lcd_4bit_t *lcd, uint8_t row
         default : ;
     }
     return ret;
-}
+} 
+ //int main(){}
 
 
 
