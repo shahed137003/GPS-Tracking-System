@@ -20,7 +20,7 @@ int flag=1;                                              // the flag will be alw
 	int i;
 	  for( i=0;i<100;i++){  
 	// GPS_module[i]=message[i];    			//used for testing
-	   GPS_module[i]=UART_READ(); 	                        //will read DATA from UART
+	   GPS_module[i]=CharIn0(); 	                        //will read DATA from UART
 	       }
     for(i=0;i<7;i++)		
 	   if(log_name[i]!= GPS_module[i])
