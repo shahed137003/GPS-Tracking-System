@@ -1,7 +1,7 @@
 #ifndef GPS
 #define GPS
-# define PI 3.141592653589793238
-# define EarthRadius  6371000
+#define PI 3.141592653589793238
+#define earthradius  6371000
 #include <Math.h>
 #include <String.h>
 #include <stdlib.h>
