@@ -8,7 +8,7 @@ void  init(){
 	gpio_digital_port_init(PORTF_INDEX,PIN0,INPUT);
 	gpio_digital_port_init(PORTF_INDEX,PIN1,OUTPUT);
 	gpio_digital_port_write(PORTF_INDEX,PIN1,LOW);
-	UART0_Ini();	
+	UART2_Ini();	
 }
 
 int __main () {
