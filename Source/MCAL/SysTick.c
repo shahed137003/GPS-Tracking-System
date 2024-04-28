@@ -6,11 +6,11 @@ void STK_voidGetCurrentValue(uint32_t *CurrentVal){    //done
 *CurrentVal =NVIC_ST_CURRENT_R ;
 }
 
-uint8_t STK_voidSetReloadValue(uint32_t ReloadVal)  {  //done
+uint8_t STK_voidSetReloadValue(uint32_t ReloadVal){  //done
 	
 	SET_BIT(NVIC_ST_RELOAD_R , ReloadVal );
 		return NVIC_ST_RELOAD_R;
-	}
+}
  
 
 void STK_Disable(void){                            //done 
@@ -38,7 +38,7 @@ void delay_s(unsigned int ticks){
 
 void delay_ms(unsigned int ticks){
    NVIC_ST_CTRL_R = 0;             		//disable systick during initialization
-  NVIC_ST_RELOAD_R = 16000 - 1; 		//Loading the number of ticks
+  NVIC_ST_RELOAD_R = 16000 - 1; 		  //Loading the number of ticks
   NVIC_ST_CURRENT_R = 0;           		//Clearing current register
   NVIC_ST_CTRL_R = 0x00000005;     		//Enabling Systick
 	while(ticks > 0)
@@ -53,8 +53,8 @@ void delay_ms(unsigned int ticks){
 
 
 void delay_us(unsigned int ticks){
- NVIC_ST_CTRL_R = 0;             		//disable systick during initialization
-  NVIC_ST_RELOAD_R = 16 - 1; 		//Loading the number of ticks
+  NVIC_ST_CTRL_R = 0;             		//disable systick during initialization
+  NVIC_ST_RELOAD_R = 16 - 1; 		      //Loading the number of ticks
   NVIC_ST_CURRENT_R = 0;           		//Clearing current register
   NVIC_ST_CTRL_R = 0x00000005;     		//Enabling Systick
 	while(ticks > 0)
@@ -63,6 +63,6 @@ void delay_us(unsigned int ticks){
       ticks--;
 	}
 	  NVIC_ST_CTRL_R = 0;             
-}
 	}
+}
 	

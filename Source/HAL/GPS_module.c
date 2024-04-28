@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <math.h>
 
-//char message[]="$GPRMC, 203522.00, A, 5109.0262308, S, 11401.8407342, E, 0.004, 133. 4, 130522, 0.0, E, D*2B";          //  Was used for testing  before connecting the GPS to Tiva 
- char logElements[12][20];
+//char message[]="$GPRMC, 203522.00, A, 5109.0262308, S, 11401.8407342, E, 0.004, 133. 4, 130522, 0.0, E, D*2B";   
+//  Was used for testing  before connecting the GPS to Tiva 
+char logElements[12][20];
 char * pointer; 
 
 char log_name[]="$GPRMC, ";
@@ -17,22 +18,22 @@ void setGPSModule(char * gps){
 	GPS_module = gps;
 }
 */
-	void GPS_read(char * GPS_module){                                 //this function will only work when Uart reads data
-int flag=1;                                              // the flag will be always 1 in case all chars are matched 
-	int i;
-	  for( i=0;i<100;i++){  
-	// GPS_module[i]=message[i];    			//used for testing
-	   GPS_module[i]=charIn2(); 	                        //will read DATA from UART
-	       }
-		
+void GPS_read(char * GPS_module){                 //this function will only work when Uart reads data
+		int flag=1;                                   // the flag will be always 1 in case all chars are matched 
+		int i;
+		for( i=0;i<100;i++){  
+		// GPS_module[i]=message[i];    							//used for testing
+		 GPS_module[i]=charIn2(); 	           	      //will read DATA from UART
+		}
+			
     for(i=0;i<7;i++)		
-	   {
+	  {
 				 if(log_name[i]!= GPS_module[i])
-	     {
+				 {
 	       flag=0;
 	      	memset(&GPS_module[0], 0, sizeof(GPS_module));
 					break;
-			 }
+				 }
    	}
 
 	}
@@ -43,57 +44,56 @@ int flag=1;                                              // the flag will be alw
 		
 		
  int GPS_output_format(char * GPS_module,float *currLong,float *currLatit){
-	GPS_read(GPS_module);
-  int  flag =1;
-	char numOfGPSElements=0;
-//	pointer=strtok( message,", ");                            
-	pointer =strtok(GPS_module,", ");
-do{
-strcpy(logElements[numOfGPSElements], pointer);
-	pointer=strtok(NULL,", ");
-	numOfGPSElements++;
-}while(pointer!=NULL);
-
-/////////////////////////
-
-
-////then we will get the current long and lat :)
-
-// //here we check the validity of the string formated gps_module
 	
-if(strcmp(logElements[2],"A")==0)
-{
+		 GPS_read(GPS_module);
+		int  flag =1;
+		char numOfGPSElements=0;
+		//pointer=strtok( message,", ");                            
+		pointer =strtok(GPS_module,", ");
+		do{
+		strcpy(logElements[numOfGPSElements], pointer);
+			pointer=strtok(NULL,", ");
+			numOfGPSElements++;
+		}while(pointer!=NULL);
 
-			//// to get the current long:)
-			if(strcmp(logElements[4],"N")==0)
-			{
-				*currLatit=atof(logElements[3]);
-				printf("currLatit: %f \n",*currLatit);	
-			}	
+		////then we will get the current long and lat :)
 
-			else if(strcmp(logElements[4],"S")==0){
-			 *currLatit=-atof(logElements[3]);
-			printf("currLatit: %f \n",*currLatit);	
-					
-			}
+		// //here we check the validity of the string formated gps_module
+		
+		if(strcmp(logElements[2],"A")==0)
+		{
 
-			// //to get the current latitude:)
-			if(strcmp(logElements[6],"E")==0){
-				*currLong=atof(logElements[5]);
-				printf("currLong: %f",*currLong);	
-			}
-			else if(strcmp(logElements[6],"W")==0){
-			 *currLong=-atof(logElements[5]);
-			printf("currLong: %f",*currLong);	
-			}
-	
-}		
-else if(strcmp(logElements[2],"V")==0)
-		{ printf ("INVALID DATA");
-		flag =0;
+					//// to get the current long:)
+					if(strcmp(logElements[4],"N")==0)
+					{
+						*currLatit=atof(logElements[3]);
+						//printf("currLatit: %f \n",*currLatit);	
+					}	
+
+					else if(strcmp(logElements[4],"S")==0){
+					 *currLatit=-atof(logElements[3]);
+					//printf("currLatit: %f \n",*currLatit);	
+							
+					}
+
+					// //to get the current latitude:)
+					if(strcmp(logElements[6],"E")==0){
+						*currLong=atof(logElements[5]);
+						//printf("currLong: %f",*currLong);	
+					}
+					else if(strcmp(logElements[6],"W")==0){
+					 *currLong=-atof(logElements[5]);
+					//printf("currLong: %f",*currLong);	
+					}
+			
+		}		
+		else if(strcmp(logElements[2],"V")==0)
+		{ 
+				//printf("INVALID DATA");
+				flag =0;
 		}
+		
 		return flag;
-
 }
 			
 
@@ -165,6 +165,7 @@ float toDegree(float angle) {
 	float mins = angle -(float)angleindegree*100;
 	return (angleindegree + (mins/60));
 }
+
 float toRad(float angle)
 {
 	return ((angle * PI) / 180);
@@ -190,9 +191,3 @@ float obtainDistance(float LongA, float LatA, float LongB, float LatB) {
 	//now we call Harversine method to get the distance
 		return harversine(LongAinRad,LatAinRad,LongBinRad,LatBinRad);
 }
-
-
- 
-
-
-
