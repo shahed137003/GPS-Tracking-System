@@ -36,26 +36,56 @@
 /* ----------------- Data Type Declarations -----------------*/
 
 typedef struct{
-	uint8_t port   		: 3;   //a:f 3bit 
-	uint8_t pin    		: 3;  //pin >>0:7 3bit 
+	uint8_t port   		: 3;  //a:f 3bit
+	uint8_t pin    		: 3;  //pin >>0:7 3bit
     uint8_t direction   : 1;  //input , output >>0,1 1bit
     uint8_t logic 		: 1;  // high , low>>1,0
-}pin_config_t;  
+}pin_config_t;
 
 typedef struct{
-    pin_config_t lcd_rs;  //0>>command ,1>>write data
-    pin_config_t lcd_en;  // 1>>enable
-    pin_config_t lcd_data[4]; // 4 pins for data
+    pin_config_t lcd_rs;       //0>>command ,1>>write data
+    pin_config_t lcd_en;       // 1>>enable
+    pin_config_t lcd_data[4];  // 4 pins for data
 }chr_lcd_4bit_t;
 
-typedef struct{ 
+typedef struct{
     pin_config_t lcd_rs;
-	  pin_config_t lcd_Rw;
+    pin_config_t lcd_Rw;
     pin_config_t lcd_en;
     pin_config_t lcd_data[8];   //8 pins for data
 }chr_lcd_8bit_t;
 
+/*-------------------- LCD Initialize ----------------------
 
+chr_lcd_4bit_t lcd1 =
+{
+    .lcd_en.direction = OUTPUT,
+    .lcd_en.port = PORTB_INDEX,
+    .lcd_en.pin = PIN1,
+    .lcd_en.logic = LOW,
+    .lcd_rs.direction = OUTPUT,
+    .lcd_rs.port = PORTB_INDEX,
+    .lcd_rs.pin = PIN0,
+    .lcd_rs.logic = LOW,
+    .lcd_data[0].direction = OUTPUT,
+    .lcd_data[0].port = PORTB_INDEX,
+    .lcd_data[0].pin = PIN2,
+    .lcd_data[0].logic = LOW,
+    .lcd_data[1].direction = OUTPUT,
+    .lcd_data[1].port = PORTB_INDEX,
+    .lcd_data[1].pin = PIN3,
+    .lcd_data[1].logic = LOW,
+    .lcd_data[2].direction = OUTPUT,
+    .lcd_data[2].port = PORTB_INDEX,
+    .lcd_data[2].pin = PIN4,
+    .lcd_data[2].logic = LOW,
+    .lcd_data[3].direction = OUTPUT,
+    .lcd_data[3].port = PORTB_INDEX,
+    .lcd_data[3].pin = PIN5,
+    .lcd_data[3].logic = LOW
+};
+
+*/
 
 
 
@@ -88,7 +118,6 @@ Std_ReturnType lcd_8bit_send_string(const chr_lcd_8bit_t *lcd, uint8_t *str);
 Std_ReturnType lcd_8bit_send_string_pos(const chr_lcd_8bit_t *lcd, uint8_t row, uint8_t column, uint8_t *str);
 Std_ReturnType lcd_8bit_send_custom_char(const chr_lcd_8bit_t *lcd, uint8_t row, uint8_t column,const uint8_t _chr[], uint8_t mem_pos);
 
-static Std_ReturnType lcd_send_8_bits(const chr_lcd_8bit_t *lcd, uint8_t _data_command);
 
 Std_ReturnType convert_uint8_to_string (uint8_t value, uint8_t *str);
 Std_ReturnType convert_uint16_to_string(uint8_t value, uint8_t *str);
