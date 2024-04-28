@@ -48,6 +48,7 @@ typedef struct{
     pin_config_t lcd_data[4];  // 4 pins for data
 }chr_lcd_4bit_t;
 
+
 typedef struct{
     pin_config_t lcd_rs;
     pin_config_t lcd_Rw;
