@@ -94,7 +94,7 @@ void UART2_Ini(void)
  /**********   function to recieve byte UART2 ******/
 char charIn2 (void)
 {
-		while ( SET_BIT(UART2_FR_R,4) ){}       // check until RXFE = 0  
+		while ( (UART2_FR_R&0X10) !=0){};      // check until RXFE = 0  
 		return (uint8_t)UART2_DR_R&0xFF;         //  return the value    
 		
 }
@@ -102,6 +102,6 @@ char charIn2 (void)
 /**********   function to send byte UART2  ********/
 void charOut2 (char data)
 {
-	while(SET_BIT(UART2_FR_R,5));	     // check until TXFF = 0  
+	while ( (UART2_FR_R&0X20) !=0){};	     // check until TXFF = 0  
 	    UART2_DR_R=data;
 }
