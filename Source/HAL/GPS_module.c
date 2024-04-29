@@ -18,7 +18,8 @@ void setGPSModule(char * gps){
 	GPS_module = gps;
 }
 */
-void GPS_read(char * GPS_module){                 //this function will only work when Uart reads data
+float mess[2];
+int GPS_read(char * GPS_module){                 //this function will only work when Uart reads data
 		int flag=1;                                   // the flag will be always 1 in case all chars are matched 
 		int i;
 		for( i=0;i<100;i++){  
@@ -35,7 +36,7 @@ void GPS_read(char * GPS_module){                 //this function will only work
 					break;
 				 }
    	}
-
+             return flag;
 	}
    	
 //then we are sure that we are recieving the correct data 
@@ -43,11 +44,13 @@ void GPS_read(char * GPS_module){                 //this function will only work
 // for formating the gps module output:
 		
 		
- int GPS_output_format(char * GPS_module,float *currLong,float *currLatit){
-	
-		 GPS_read(GPS_module);
-		int  flag =1;
-		char numOfGPSElements=0;
+ int GPS_output_format(char * GPS_module,float *mess){
+	int  flag =1;
+	 char numOfGPSElements=0;
+	 
+		flag= GPS_read(GPS_module);
+		
+		
 		//pointer=strtok( message,", ");                            
 		pointer =strtok(GPS_module,", ");
 		do{
@@ -66,23 +69,23 @@ void GPS_read(char * GPS_module){                 //this function will only work
 					//// to get the current long:)
 					if(strcmp(logElements[4],"N")==0)
 					{
-						*currLatit=atof(logElements[3]);
+						mess[0]=atof(logElements[3]);
 						//printf("currLatit: %f \n",*currLatit);	
 					}	
 
 					else if(strcmp(logElements[4],"S")==0){
-					 *currLatit=-atof(logElements[3]);
+					mess[0] =-atof(logElements[3]);
 					//printf("currLatit: %f \n",*currLatit);	
 							
 					}
 
 					// //to get the current latitude:)
 					if(strcmp(logElements[6],"E")==0){
-						*currLong=atof(logElements[5]);
+						mess[1]=atof(logElements[5]);
 						//printf("currLong: %f",*currLong);	
 					}
 					else if(strcmp(logElements[6],"W")==0){
-					 *currLong=-atof(logElements[5]);
+					mess[1] =-atof(logElements[5]);
 					//printf("currLong: %f",*currLong);	
 					}
 			
