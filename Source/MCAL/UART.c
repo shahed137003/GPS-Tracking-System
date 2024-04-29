@@ -9,9 +9,9 @@
 ****************************************************************************************************************************************************/
 
 /*****  include some files  ******/
-#include "tm4c123gh6pm.h"
+//#include "../..TM4C123.h"
 #include "../../Headers/MCAL/UART.h"
-
+#include "../../Headers/Services/TM4C123.h"
 // some comments to help you in having some generic code 
 // you can have a enum that conation the name of the port ang having it as an integer 
 
@@ -94,14 +94,14 @@ void UART2_Ini(void)
  /**********   function to recieve byte UART2 ******/
 char charIn2 (void)
 {
-		while ( SET_BIT(UART2_FR_R,4)  ){}       // check until RXFE = 0  
-		return (uint8_t)UART2_DR_R&0xFF;         //  return the value    
+		while ( (UART2_FR_R&0X10) !=0);         // check until RXFE = 0  
+		return (char)UART2_DR_R   ;         //  return the value    
 		
 }
 
 /**********   function to send byte UART2  ********/
 void charOut2 (char data)
 {
-	while(SET_BIT(UART2_FR_R,5));	     // check until TXFF = 0  
+	while((UART2_FR_R&0X20) !=0) ;	     // check until TXFF = 0  
 	    UART2_DR_R=data;
 }
